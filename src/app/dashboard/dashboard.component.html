@@ -1,0 +1,54 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title">Generar Reporte</h4>
+                      <p class="card-category">Completa los campos</p>
+                  </div>
+                  <div class="card-body">
+                      <form>
+                          <div class="row">
+                          
+                              <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Numbero de serie">
+                                  </mat-form-field>
+                              </div>
+                              
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Horas" type="number">
+                                </mat-form-field>
+                              </div>
+                              
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Marcas" type="text">
+                                </mat-form-field>
+                              </div>
+                          </div>                    
+                          <div class="row">
+                              <div class="col-md-12">
+                                <label>Descripción</label>
+                                <mat-form-field class="example-full-width">
+                                   <textarea matInput placeholder="Escriba aqui la descripción del reporte."></textarea>
+                                 </mat-form-field>
+                              </div>
+                          </div>
+                          
+                          <button mat-raised-button type="submit" class="btn btn-danger pull-right">Generar PDF</button>
+                          <div class="clearfix"></div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+          
+      </div>
+  </div>
+</div>
