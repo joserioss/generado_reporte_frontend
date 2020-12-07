@@ -1,0 +1,74 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <!-- Area de titulo -->
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Ultimos reportes</h4>
+            <p class="card-category">Seleccione en el reporte para ver mas detalles</p>
+          </div>
+          <!-- Area de Filtrado -->
+          <div class="col-sm-4">
+            <mat-form-field class="example-full-width has-danger">
+              <input matInput (keyup)= "filtrar($event.target.value)" placeholder="Filtrar reporte">
+              <span class="form-control-feedback">
+                <i class="material-icons">search</i>
+              </span>
+            </mat-form-field>
+          </div>
+          <!-- Area general -->
+          <div class="card-body">
+            <div class="table-responsive">
+              <mat-table [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="id">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    ID
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{ row.id }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="mark">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    MARCA
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{ row.mark }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="serie">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    N° SERIE
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{ row.serie }}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="hours">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    N° HORAS
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{ row.hours }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="acciones">
+                  <mat-header-cell *matHeaderCellDef>VER DETALLES</mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    <button mat-raised-button class="btn btn-primary btn-sm" (click)="abrirDialogo(row)"
+                    >
+                      <span class="material-icons">open_in_browser</span>
+                    </button>
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row
+                  *matHeaderRowDef="displayedColumns"
+                ></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns">
+                </mat-row>
+              </mat-table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

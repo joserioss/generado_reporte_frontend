@@ -1,0 +1,63 @@
+<div class="col-md-12">
+  <div class="card card-stats">
+    <div class="card-header card-header-danger card-header-icon">
+      <div class="card-icon">
+        <i class="material-icons">report</i>
+      </div>
+      <p class="card-category">Reporte</p>
+      <h3 class="card-title">N° X </h3>
+    </div>
+    <div class="card-footer">
+      <div class="stats">
+        <i class="material-icons">date_range</i> Fecha del reporte
+      </div>
+    </div>
+    <div class="card-body">
+      <mat-form-field>
+        <input matInput placeholder="N° de Serie" [(ngModel)]="vehicle.serie" />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="N° de Horas" [(ngModel)]="vehicle.hours" />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Marca" [(ngModel)]="vehicle.mark" />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Descripcion"
+          [(ngModel)]="vehicle.description"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="foto" [(ngModel)]="vehicle.photo" />
+      </mat-form-field>
+      <img
+        [src]="vehicle.photo"
+        alt="foto del vehiculo"
+        width="50%"
+        height="50%"
+        *ngIf="vehicle.photo != null"
+      />
+    </div>
+    <div class="card-body">
+      <button
+        mat-raised-button
+        class="btn btn-warning btn-sm"
+        (click)="operar()"
+      >
+        MODIFICAR
+      </button>
+      <button
+        mat-raised-button
+        class="btn btn-danger btn-sm"
+        (click)="cancelar()"
+      >
+        CANCELAR
+      </button>
+    </div>
+    <div class="card-body">
+      <button mat-raised-button type="submit" class="btn btn-danger pull-right">Generar PDF</button>
+    </div>
+  </div>
+</div>
