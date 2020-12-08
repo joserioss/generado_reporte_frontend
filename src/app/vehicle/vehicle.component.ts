@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Vehicle } from 'app/_model/vehicle';
 import { VehicleService } from 'app/_service/vehicle.service';
 import { MatSort } from '@angular/material/sort';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-vehicle',
@@ -17,12 +18,20 @@ export class VehicleComponent implements OnInit {
   displayedColumns = [ 'id', 'serie', 'hours', 'mark', 'acciones']; 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private vehicleService : VehicleService, private dialog: MatDialog) { }
+  constructor(private vehicleService : VehicleService, private dialog: MatDialog, private snack: MatSnackBar) { }
 
   ngOnInit(): void {
     this.vehicleService.vehicleCambio.subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;
+    });
+
+    this.vehicleService.mensajeCambio.subscribe(data => {
+      this.snack.open(data, 'AVISO', {
+        duration: 2000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom'
+      })
     });
 
     this.vehicleService.listar().subscribe(data =>{
@@ -35,10 +44,11 @@ export class VehicleComponent implements OnInit {
     this.dataSource.filter = valor.trim().toLowerCase();
   }
 
-  abrirDialogo(vehicle : Vehicle){
+  // Uso de veh para nuevo y vehicle para modificar.
+  abrirDialogo(vehicle? : Vehicle){
+    let veh = vehicle != null ? vehicle : new Vehicle();
     this.dialog.open(VehicleDialogoComponent,{
-      width: '400px',
-      data:vehicle
+      data:veh
     });
   }
 }

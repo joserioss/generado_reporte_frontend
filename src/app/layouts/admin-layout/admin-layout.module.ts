@@ -16,6 +16,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
+import { MatSortModule } from '@angular/material/sort';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 @NgModule({
   imports: [
@@ -30,9 +33,10 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatSelectModule,
     MatTooltipModule,
     MatTableModule,
-    MatFormFieldModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSortModule,
+    MatSnackBarModule
   ],
   declarations: [
     DashboardComponent,

@@ -39,6 +39,15 @@ export class VehicleDialogoComponent implements OnInit {
         return this.vehicleService.listar();
       })).subscribe(data => {
         this.vehicleService.vehicleCambio.next(data);
+        this.vehicleService.mensajeCambio.next('SE MODIFICO');
+      });
+    }
+    else{
+      this.vehicleService.registrar(this.vehicle).pipe(switchMap ( ()=> {
+        return this.vehicleService.listar();
+      })).subscribe(data => {
+        this.vehicleService.vehicleCambio.next(data);
+        this.vehicleService.mensajeCambio.next('SE REGISTRO');
       });
     }
     this.dialogRef.close();

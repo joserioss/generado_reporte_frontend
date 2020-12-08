@@ -52,7 +52,7 @@
                 <ng-container matColumnDef="acciones">
                   <mat-header-cell *matHeaderCellDef>VER DETALLES</mat-header-cell>
                   <mat-cell *matCellDef="let row">
-                    <button mat-raised-button class="btn btn-primary btn-sm" (click)="abrirDialogo(row)"
+                    <button mat-raised-button class="btn btn-success btn-sm" (click)="abrirDialogo(row)"
                     >
                       <span class="material-icons">open_in_browser</span>
                     </button>
@@ -68,6 +68,11 @@
             </div>
           </div>
         </div>
+        <button mat-fab class="btn btn-danger btn-round" (click)= "abrirDialogo()" style="float: right; margin-right: 20px">
+          <div class="card-icon">
+            <i class="material-icons">create</i>
+          </div>
+        </button>
       </div>
     </div>
   </div>
