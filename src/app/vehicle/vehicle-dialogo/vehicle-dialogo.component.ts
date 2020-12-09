@@ -52,4 +52,16 @@ export class VehicleDialogoComponent implements OnInit {
     }
     this.dialogRef.close();
   }
+
+  descargarReporte(){
+    this.vehicleService.generarReporte(this.data.id).subscribe(data => {
+      const url = window.URL.createObjectURL(data);
+      const a = document.createElement('a');
+      a.setAttribute('style','display:none');
+      document.body.appendChild(a);
+      a.href = url;
+      a.download = 'archivo.pdf';
+      a.click();
+    });
+  }
 }

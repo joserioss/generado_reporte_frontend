@@ -35,4 +35,10 @@ export class VehicleService {
   eliminar(id: number){
     return this.http.delete(`${this.url}/${id}`);
   }
+
+  generarReporte(id: number){
+    return this.http.get(`${this.url}/${id}/reporte`, {
+      responseType: 'blob'
+    });
+  }
 }
