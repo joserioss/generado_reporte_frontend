@@ -1,8 +1,7 @@
 export class Vehicle {
-    id: number;
+    idVehicle: number;
+    equipment: string;
     serie: string;
+    ot: number;
     hours: number;
-    mark: string;
-    description: string;
-    photo: string;
 }

@@ -21,6 +21,11 @@ import {
   AgmCoreModule
 } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { RepairmanComponent } from './repairman/repairman.component';
+import { RepairmanDialogoComponent } from './repairman/repairman-dialogo/repairman-dialogo.component';
+import { WorkdoneComponent } from './workdone/workdone.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { WorkdoneEdicionComponent } from './workdone/workdone-edicion/workdone-edicion.component';
 
 
 @NgModule({
@@ -38,9 +43,11 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
   ],
   declarations: [
     AppComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES'},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,87 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="card">
+        <!-- Area de titulo -->
+        <div class="card-header card-header-danger">
+          <h4 class="card-title">Generar reporte PDF</h4>
+          <p class="card-category">Rellene todos los campos</p>
+        </div>
+        <!-- Area general -->
+        <div class="card-body">
+          <!-- Seleccion del vehiculo -->
+          <mat-form-field>
+            <mat-select
+              placeholder="Vehiculo"
+              [(value)]="idVehicleSeleccionado"
+            >
+              <mat-option *ngFor="let p of vehicles" [value]="p.idVehicle">
+                {{ p.equipment }} {{ p.serie }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- Seleccion del tecnico -->
+          <mat-form-field>
+            <mat-select
+              placeholder="Tecnico"
+              [(value)]="idRepairmanSeleccionado"
+            >
+              <mat-option *ngFor="let r of repairmen" [value]="r.idRepairman">
+                {{ r.name }} {{ r.position }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- Seleccion de la fecha -->
+          <mat-form-field>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              placeholder="Fecha del reporte"
+              [max]="maxFecha"
+              [(ngModel)]="fechaSeleccionada"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <!-- Titulo resumen -->
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="titulo del reporte"
+              [(ngModel)]="title"
+            />
+          </mat-form-field>
+          <!-- Comentarios -->
+          <mat-form-field>
+            <textarea
+              matInput
+              placeholder="comentarios"
+              [(ngModel)]="commentary"
+            ></textarea>
+          </mat-form-field>
+          <button
+            mat-raised-button
+            class="btn btn-success btn-sm"
+            (click)="aceptar()"
+            [disabled]="estadoBotonRegistrar()"
+          >
+            Generar reporte
+          </button>
+          <button
+            mat-raised-button
+            class="btn btn-primary btn-sm"
+            (click)="verWorkdone()"
+            [disabled]="booleanDescarga"
+          >
+            Descargar Ultimo Reporte
+          </button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>

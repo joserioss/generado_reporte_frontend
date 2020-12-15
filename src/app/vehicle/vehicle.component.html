@@ -5,13 +5,13 @@
         <div class="card">
           <!-- Area de titulo -->
           <div class="card-header card-header-danger">
-            <h4 class="card-title">Ultimos reportes</h4>
-            <p class="card-category">Seleccione en el reporte para ver mas detalles</p>
+            <h4 class="card-title">Vehiculos registrados</h4>
+            <p class="card-category">Modifica el registro de un vehiculo o crea uno vehiculo</p>
           </div>
           <!-- Area de Filtrado -->
           <div class="col-sm-4">
             <mat-form-field class="example-full-width has-danger">
-              <input matInput (keyup)= "filtrar($event.target.value)" placeholder="Filtrar reporte">
+              <input matInput (keyup)= "filtrar($event.target.value)" placeholder="Filtrar vehiculo registrado">
               <span class="form-control-feedback">
                 <i class="material-icons">search</i>
               </span>
@@ -21,18 +21,11 @@
           <div class="card-body">
             <div class="table-responsive">
               <mat-table [dataSource]="dataSource" matSort>
-                <ng-container matColumnDef="id">
+                <ng-container matColumnDef="equipment">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>
-                    ID
+                    Equipo
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{ row.id }} </mat-cell>
-                </ng-container>
-
-                <ng-container matColumnDef="mark">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>
-                    MARCA
-                  </mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{ row.mark }} </mat-cell>
+                  <mat-cell *matCellDef="let row"> {{ row.equipment}} </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="serie">
@@ -50,13 +43,18 @@
                 </ng-container>
 
                 <ng-container matColumnDef="acciones">
-                  <mat-header-cell *matHeaderCellDef>VER DETALLES</mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef>Modificar</mat-header-cell>
                   <mat-cell *matCellDef="let row">
                     <button mat-raised-button class="btn btn-success btn-sm" (click)="abrirDialogo(row)"
                     >
                       <span class="material-icons">open_in_browser</span>
                     </button>
+                    <button mat-raised-button class="btn btn-danger btn-sm" (click)="eliminar(row)"
+                    >
+                      <span class="material-icons">delete</span>
+                    </button>
                   </mat-cell>
+                  
                 </ng-container>
 
                 <mat-header-row

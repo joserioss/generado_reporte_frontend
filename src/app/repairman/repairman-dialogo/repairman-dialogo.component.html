@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Detalles del tecnico</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="card-body">
+    <mat-form-field>
+      <input matInput placeholder="Nombre del tecnico" [(ngModel)]="repairman.name" />
+    </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Especialidad" [(ngModel)]="repairman.position" />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Empresa" [(ngModel)]="repairman.company" />
+  </mat-form-field> 
+  </div>
+</mat-dialog-content>
+<div mat-dialog-actions>
+  <button mat-raised-button class="btn btn-warning btn-sm" (click)="operar()">
+    Guardar
+  </button>
+<button mat-raised-button class="btn btn-danger btn-sm" (click)="cancelar()">
+  Salir
+</button>
+</div>
+

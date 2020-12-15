@@ -13,6 +13,13 @@ export class VehicleDialogoComponent implements OnInit {
 
   vehicle : Vehicle;
 
+  archivosSeleccionados: FileList;
+  archivoSeleccionado: File;
+  nombreArchivo: string;
+
+  imagenData: any;
+  imagenEstado: boolean;
+
   constructor(
     private dialogRef: MatDialogRef<VehicleDialogoComponent>,
     @Inject(MAT_DIALOG_DATA) private data: Vehicle,
@@ -21,12 +28,11 @@ export class VehicleDialogoComponent implements OnInit {
 
   ngOnInit(): void {
     this.vehicle = new Vehicle();
-    this.vehicle.id = this.data.id;
+    this.vehicle.idVehicle = this.data.idVehicle;
     this.vehicle.serie = this.data.serie;
     this.vehicle.hours = this.data.hours;
-    this.vehicle.mark = this.data.mark;
-    this.vehicle.description = this.data.description;
-    this.vehicle.photo = this.data.photo;
+    this.vehicle.equipment = this.data.equipment;
+    this.vehicle.ot = this.data.ot;
   }
 
   cancelar(){
@@ -34,7 +40,7 @@ export class VehicleDialogoComponent implements OnInit {
   }
 
   operar(){
-    if(this.vehicle != null && this.vehicle.id > 0){
+    if(this.vehicle != null && this.vehicle.idVehicle > 0){
       this.vehicleService.modificar(this.vehicle).pipe(switchMap ( ()=> {
         return this.vehicleService.listar();
       })).subscribe(data => {
@@ -54,7 +60,7 @@ export class VehicleDialogoComponent implements OnInit {
   }
 
   descargarReporte(){
-    this.vehicleService.generarReporte(this.data.id).subscribe(data => {
+    this.vehicleService.generarReporte(this.data.idVehicle).subscribe(data => {
       const url = window.URL.createObjectURL(data);
       const a = document.createElement('a');
       a.setAttribute('style','display:none');
@@ -62,6 +68,19 @@ export class VehicleDialogoComponent implements OnInit {
       a.href = url;
       a.download = 'archivo.pdf';
       a.click();
+      this.vehicleService.mensajeCambio.next('PDF Generado');
+    });
+  }
+
+  seleccionarArchivo(e: any){
+    this.nombreArchivo = e.target.files[0].name;
+    this.archivosSeleccionados = e.target.files;
+  }
+
+  subirArchivo(){
+    this.archivoSeleccionado = this.archivosSeleccionados.item(0);
+    this.vehicleService.guardarArchivo(this.archivoSeleccionado).subscribe( data => {
+      console.log(data);
     });
   }
 }

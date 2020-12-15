@@ -6,6 +6,7 @@ import { Vehicle } from 'app/_model/vehicle';
 import { VehicleService } from 'app/_service/vehicle.service';
 import { MatSort } from '@angular/material/sort';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-vehicle',
@@ -15,7 +16,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class VehicleComponent implements OnInit {
 
   dataSource: MatTableDataSource<Vehicle>;
-  displayedColumns = [ 'id', 'serie', 'hours', 'mark', 'acciones']; 
+  displayedColumns = [ 'equipment', 'serie', 'hours', 'acciones']; 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(private vehicleService : VehicleService, private dialog: MatDialog, private snack: MatSnackBar) { }
@@ -49,6 +50,15 @@ export class VehicleComponent implements OnInit {
     let veh = vehicle != null ? vehicle : new Vehicle();
     this.dialog.open(VehicleDialogoComponent,{
       data:veh
+    });
+  }
+
+  eliminar(vehicle: Vehicle){
+    this.vehicleService.eliminar(vehicle.idVehicle).pipe(switchMap( ()=> {
+      return this.vehicleService.listar();
+    })).subscribe(data => {
+      this.vehicleService.vehicleCambio.next(data);
+      this.vehicleService.mensajeCambio.next('SE ELIMINO');
     });
   }
 }

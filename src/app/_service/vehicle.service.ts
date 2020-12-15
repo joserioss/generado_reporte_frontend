@@ -12,7 +12,7 @@ export class VehicleService {
   vehicleCambio = new Subject<Vehicle[]>();
   mensajeCambio = new Subject<string>();
 
-  url: string = `${environment.HOST}/vehicle`
+  url: string = `${environment.HOST}/vehicles`
 
   constructor(private http:HttpClient) { }
 
@@ -40,5 +40,13 @@ export class VehicleService {
     return this.http.get(`${this.url}/${id}/reporte`, {
       responseType: 'blob'
     });
+  }
+
+  guardarArchivo(data: File){
+    let formdata : FormData = new FormData();
+    formdata.append('adjunto', data);
+
+    return this.http.post(`${this.url}/guardarArchivo`, formdata);
+
   }
 }

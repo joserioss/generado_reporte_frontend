@@ -1,5 +1,4 @@
-  <h2 mat-dialog-title>Detalles del reporte</h2>
-  <!-- <h3> ${vehicle.photo}</h3> -->
+  <h2 mat-dialog-title>Detalles del vehiculo</h2>
   <mat-dialog-content class="mat-typography">
     <div class="card-body">
       <mat-form-field>
@@ -9,35 +8,18 @@
       <input matInput placeholder="N° de Horas"  type="number" [(ngModel)]="vehicle.hours" />
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Marca" [(ngModel)]="vehicle.mark" />
+      <input matInput placeholder="Equipo" [(ngModel)]="vehicle.equipment" />
     </mat-form-field>
     <mat-form-field>
-      <textarea
-        matInput
-        placeholder="Descripcion"
-        [(ngModel)]="vehicle.description"
-      ></textarea>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="foto" [(ngModel)]="vehicle.photo" />
-      </mat-form-field>
-      <img
-      [src]="vehicle.photo"
-      alt="foto del vehiculo"
-      width="50%"
-      height="50%"
-      *ngIf="vehicle.photo != null"
-      />
+      <input matInput placeholder="Ot"  type="number" [(ngModel)]="vehicle.ot" />
+    </mat-form-field>
+    
     </div>
   </mat-dialog-content>
-  <!-- Acciones de cuadro dialogo -->
   <div mat-dialog-actions>
     <button mat-raised-button class="btn btn-warning btn-sm" (click)="operar()">
       Guardar
     </button>
-  <button mat-raised-button class="btn btn-success btn-sm" (click)="descargarReporte()">
-    Descargar PDF
-  </button>
   <button mat-raised-button class="btn btn-danger btn-sm" (click)="cancelar()">
     Salir
   </button>
