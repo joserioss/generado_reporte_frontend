@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { WorkdoneService } from './../_service/workdone.service';
 import { Workdone } from './../_model/workdone';
-import { DetailWorkdone } from './../_model/detailWorkdone';
 import { RepairmanService } from './../_service/repairman.service';
 import { Vehicle } from 'app/_model/vehicle';
 import { VehicleService } from 'app/_service/vehicle.service';
@@ -24,13 +23,10 @@ export class WorkdoneComponent implements OnInit {
   repairmen : Repairman[];
   workdone: Workdone[];
 
-  maxFecha : Date = new Date();
-  fechaSeleccionada: Date = new Date();
-
-  title: string;
+  fecha: Date = new Date();
+  titleWorkdone: string;
   commentary: string;
-
-  detailWorkdone: DetailWorkdone[] = [];
+  detail: string;
 
   listaWorkdone: Workdone[] = [];
   booleanDescarga: boolean = true;
@@ -69,24 +65,8 @@ export class WorkdoneComponent implements OnInit {
     });
   }
 
-  agregar() {
-    if (this.title != null && this.commentary != null) {
-      let det = new DetailWorkdone();
-      det.title = this.title;
-      det.commentary = this.commentary;
-      this.detailWorkdone.push(det);
-
-      this.title = null;
-      this.commentary = null;
-    }
-  }
-
-  removerComentario(index: number) {
-    this.detailWorkdone.splice(index, 1);
-  }
-
   estadoBotonRegistrar(){
-    return (this.idVehicleSeleccionado === 0 || this.idRepairmanSeleccionado === 0 || this.title == null || this.commentary == null);
+    return (this.idVehicleSeleccionado === 0 || this.idRepairmanSeleccionado === 0 || this.titleWorkdone == null || this.commentary == null);
   }
 
   aceptar(){
@@ -94,19 +74,17 @@ export class WorkdoneComponent implements OnInit {
     vehicle.idVehicle = this.idVehicleSeleccionado;
     let repairman = new Repairman();
     repairman.idRepairman = this.idRepairmanSeleccionado;
-    let det = new DetailWorkdone();
-    det.title = this.title;
-    det.commentary = this.commentary;
-    this.detailWorkdone.push(det);
  
     let workdoneNuevo =  new Workdone();
     workdoneNuevo.vehicle = vehicle;
     workdoneNuevo.repairman = repairman;
+    workdoneNuevo.titleWorkdone = this.titleWorkdone;
+    workdoneNuevo.commentary = this.commentary;
+    workdoneNuevo.detail = this.detail;
     //ISODATE
-    let tzoffset = (this.fechaSeleccionada).getTimezoneOffset() * 60000;
+    let tzoffset = (this.fecha).getTimezoneOffset() * 60000;
     let localISOTime = (new Date(Date.now() - tzoffset)).toISOString();
     workdoneNuevo.fecha = localISOTime;
-    workdoneNuevo.detailWorkdone = this.detailWorkdone;
 
     this.workdoneService.registrar(workdoneNuevo).pipe(switchMap ( ()=> {
       return this.workdoneService.listar();
@@ -114,23 +92,30 @@ export class WorkdoneComponent implements OnInit {
       this.snackBar.open("Se registró", "Aviso", { duration: 2000 });
       this.listarWorkdone(); //Solucion a problema de no actualizacion de ultimo registro
       this.booleanDescarga = false; //Activacion de descarga ultimo
-      setTimeout( () => {
-        this.limpiarControles();
-      }, 2000);
-    });   
+    });
+    setTimeout( () => {
+      this.limpiarControles();
+    }, 2000);
   }
 
   verWorkdone(){
     this.listarWorkdone();
     let len = this.workdone.length;
     let ultimoWorkdone = this.workdone[len-1];
-    console.log(ultimoWorkdone);
     this.descargarReporte(ultimoWorkdone.idWorkdone);
+  }
+
+  borrarTodo(){
+    this.workdoneService.borrarTodo().subscribe(() => {
+      this.booleanDescarga = true;
+      return this.booleanDescarga;
+    });
   }
 
   registroOK(){
     return this.booleanDescarga;
   }
+
   descargarReporte(id: number){
     this.workdoneService.generarReporte(id).subscribe(data => {
       const url = window.URL.createObjectURL(data);
@@ -140,21 +125,17 @@ export class WorkdoneComponent implements OnInit {
       a.href = url;
       a.download = 'archivo.pdf';
       a.click();
-      this.workdoneService.mensajeCambio.next('PDF Generado');
     });
+    this.borrarTodo();
   }
 
   limpiarControles(){
-    this.detailWorkdone = [];
-    this.title = '';
+    this.titleWorkdone = '';
     this.commentary = '';
+    this.detail = '';
     this.idVehicleSeleccionado = 0;
     this.idRepairmanSeleccionado = 0;
-    this.fechaSeleccionada = new Date();
-    this.fechaSeleccionada.setHours(0);
-    this.fechaSeleccionada.setMinutes(0);
-    this.fechaSeleccionada.setSeconds(0);
-    this.fechaSeleccionada.setMilliseconds(0);
+    this.fecha = new Date();
   }
 
 }

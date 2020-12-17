@@ -25,6 +25,10 @@ export class WorkdoneService {
     return this.http.post(this.url, workdone);
   }
 
+  borrarTodo(){
+    return this.http.get( `${this.url}/deleteAll`);
+  }
+
   generarReporte(id: number){
     return this.http.get(`${this.url}/${id}/reporte`, {
       responseType: 'blob'

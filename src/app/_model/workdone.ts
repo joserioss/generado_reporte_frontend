@@ -1,4 +1,3 @@
-import { DetailWorkdone } from './detailWorkdone';
 import { Vehicle } from 'app/_model/vehicle';
 import { Repairman } from './repairman';
 
@@ -8,6 +7,8 @@ export class Workdone{
     vehicle: Vehicle;
     repairman: Repairman;
     fecha: string;
-    detailWorkdone: DetailWorkdone[];
+    titleWorkdone: string;
+    commentary: string;
+    detail: string;
     
 }

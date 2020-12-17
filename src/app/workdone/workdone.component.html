@@ -31,36 +31,28 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <!-- Seleccion de la fecha -->
-          <mat-form-field>
-            <input
-              matInput
-              [matDatepicker]="picker"
-              placeholder="Fecha del reporte"
-              [max]="maxFecha"
-              [(ngModel)]="fechaSeleccionada"
-            />
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-
           <!-- Titulo resumen -->
           <mat-form-field>
             <input
               matInput
               placeholder="titulo del reporte"
-              [(ngModel)]="title"
+              [(ngModel)]="titleWorkdone"
             />
           </mat-form-field>
           <!-- Comentarios -->
           <mat-form-field>
             <textarea
               matInput
-              placeholder="comentarios"
+              placeholder="comentario principal"
               [(ngModel)]="commentary"
+            ></textarea>
+          </mat-form-field>
+          <!-- Detalles -->
+          <mat-form-field>
+            <textarea
+              matInput
+              placeholder="detalles"
+              [(ngModel)]="detail"
             ></textarea>
           </mat-form-field>
           <button
@@ -70,8 +62,9 @@
             [disabled]="estadoBotonRegistrar()"
           >
             Generar reporte
-          </button>
-          <button
+          </button> 
+        </div>
+        <button
             mat-raised-button
             class="btn btn-primary btn-sm"
             (click)="verWorkdone()"
@@ -79,7 +72,6 @@
           >
             Descargar Ultimo Reporte
           </button>
-        </div>
       </div>
       
     </div>

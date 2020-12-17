@@ -1,4 +1,3 @@
-import { WorkdoneEdicionComponent } from './../../workdone/workdone-edicion/workdone-edicion.component';
 import { WorkdoneComponent } from './../../workdone/workdone.component';
 import { RepairmanDialogoComponent } from './../../repairman/repairman-dialogo/repairman-dialogo.component';
 import { RepairmanComponent } from './../../repairman/repairman.component';
@@ -10,7 +9,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
-import { UserProfileComponent } from '../../user-profile/user-profile.component';
 import { VehicleComponent } from '../../vehicle/vehicle.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -51,13 +49,11 @@ import { MatExpansionModule } from '@angular/material/expansion'
   ],
   declarations: [
     DashboardComponent,
-    UserProfileComponent,
     VehicleComponent,
     VehicleDialogoComponent,
     RepairmanComponent,
     RepairmanDialogoComponent,
-    WorkdoneComponent,
-    WorkdoneEdicionComponent,
+    WorkdoneComponent
   ]
 })
 
